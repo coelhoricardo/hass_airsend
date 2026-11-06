@@ -57,6 +57,7 @@ class AirSendAnySensor(RestoreEntity, SensorEntity):
 
     def __init__(self, hass: HomeAssistant, device: Device, internal_url: str) -> None:
         self._device = device
+        self._state = None  # fork : sans cette ligne, native_value lève AttributeError tant qu'aucun état n'est restauré
         self._unique_id = DOMAIN + "_" + str(device.unique_channel_name) + "_sensor"
         self.entity_id = generate_entity_id("sensor.{}", device.unique_channel_name, hass=hass)
 
